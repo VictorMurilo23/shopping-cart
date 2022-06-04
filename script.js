@@ -1,5 +1,19 @@
 const sectionNavegador = document.querySelector('.items');
 const cartItems = document.querySelector('.cart__items');
+const carrinho = document.querySelector('.cart');
+const p = document.createElement('p');
+p.className = 'total-price';
+
+const precos = () => {
+  const todosOsPrecos = getSavedCartItems('cartItems').split(' ')
+  .filter((element) => element.includes('$'))
+  .map((preco) => Number(preco.replace(/[^\d,.]+/g, ''))); /* vai tirar tudo, menos os numeros, e depois vai transformar tudo no tipo number
+  https://stackoverflow.com/questions/9261822/regex-that-replace-any-chars-except-number#:~:text=%5B%5E%5Cd.%2C%5D,%22%2C%20a%20negated%20character%20class. <-- me ajudou na parte de pegar só os números de uma string
+  */
+  const total = todosOsPrecos.reduce((acc, cur) => acc + cur, 0);
+  p.innerText = `${Math.round(total * 100) / 100}`; // https://www.codingem.com/javascript-how-to-limit-decimal-places/ <-- usei isso pra descobrir outros meios de limitar as casas decimais
+  carrinho.appendChild(p);
+};
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -32,6 +46,7 @@ const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').inn
 const cartItemClickListener = (event) => {
   event.target.remove();
   saveCartItems(cartItems.innerText);
+  precos();
 };
 
 const createCartItemElement = ({ id: sku, title: name, price: salePrice }) => {
@@ -52,16 +67,18 @@ const listaSalva = (array) => {
   });
 };
 
+const colocaNoCarrinho = async (id) => {
+  const itemAtual = await fetchItem(id);
+  cartItems.appendChild(createCartItemElement(itemAtual));
+  saveCartItems(cartItems.innerText);
+  precos();
+};
+
 window.onload = async () => { 
   await fetchProducts('computador')
   .then((data) => data.results.forEach((element) => {
     sectionNavegador.appendChild(createProductItemElement(element));
   }));
-  const colocaNoCarrinho = async (id) => {
-    const itemAtual = await fetchItem(id);
-    cartItems.appendChild(createCartItemElement(itemAtual));
-    saveCartItems(cartItems.innerText);
-  };
   const todosOsBotoesCarrinho = document.querySelectorAll('.item__add');
    todosOsBotoesCarrinho.forEach((element) => {
     element.addEventListener('click', (event) => {
@@ -70,4 +87,5 @@ window.onload = async () => {
     });
   });
   listaSalva(getSavedCartItems('cartItems').split('\n'));
+  precos();
 };
