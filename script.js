@@ -5,6 +5,20 @@ const botaoEsvaziar = document.querySelector('.empty-cart');
 const p = document.createElement('p');
 p.className = 'total-price';
 
+const colocaLoading = () => {
+  const h1 = document.createElement('h1');
+  h1.className = 'loading';
+  h1.innerText = 'carregando...';
+  sectionNavegador.appendChild(h1);
+};
+
+const removeLoading = () => {
+  const loading = document.querySelector('.loading');
+  if (loading !== undefined) {
+    loading.remove();
+  }
+};
+
 const precos = () => {
   const todosOsPrecos = getSavedCartItems('cartItems').split(' ')
   .filter((element) => element.includes('$'))
@@ -81,11 +95,13 @@ const colocaNoCarrinho = async (id) => {
   precos();
 };
 
-window.onload = async () => { 
+window.onload = async () => {
+  colocaLoading();
   await fetchProducts('computador')
   .then((data) => data.results.forEach((element) => {
     sectionNavegador.appendChild(createProductItemElement(element));
   }));
+  await removeLoading();
   const todosOsBotoesCarrinho = document.querySelectorAll('.item__add');
    todosOsBotoesCarrinho.forEach((element) => {
     element.addEventListener('click', (event) => {
