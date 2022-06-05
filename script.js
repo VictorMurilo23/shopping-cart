@@ -1,6 +1,7 @@
 const sectionNavegador = document.querySelector('.items');
 const cartItems = document.querySelector('.cart__items');
 const carrinho = document.querySelector('.cart');
+const botaoEsvaziar = document.querySelector('.empty-cart');
 const p = document.createElement('p');
 p.className = 'total-price';
 
@@ -14,6 +15,12 @@ const precos = () => {
   p.innerText = `${Math.round(total * 100) / 100}`; // https://www.codingem.com/javascript-how-to-limit-decimal-places/ <-- usei isso pra descobrir outros meios de limitar as casas decimais
   carrinho.appendChild(p);
 };
+
+botaoEsvaziar.addEventListener('click', () => {
+  cartItems.innerHTML = '';
+  localStorage.clear();
+  p.innerText = `${0}`;
+});
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
