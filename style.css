@@ -10,66 +10,40 @@ body {
 }
 
 .header {
-  position: relative;
-  background-color: rgb(3, 52, 45);
+  justify-content: space-between;
+  background-color: rgb(65, 25, 127);
   display: flex;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 5em;
 }
 
-.container-title {
-  width: 80%;
+.container-logo {
+  padding: 8px;
+  width: 70%;
 }
 
-.title {
-  color: rgb(221, 221, 221);
-  font-size: 30px;
-  padding-left: 30px;
+.headerLogoImage {
+  height: 90%;
 }
 
 .container-cartTitle {
-  position: relative;
   display: flex;
   align-items: center;
-  background-color: rgb(10, 118, 79);
-  width: 40%;
+  justify-content: center;
+  background-color: rgb(0, 213, 226);
+  width: 30%;
+  gap: 4px;
+  font-size: 1rem;
   height: 100%;
-  margin-left: 30px;
 }
 
-.container-cartTitle span {
-  z-index: 1;
-}
-
-.container-cartTitle:after {
-  content: '';
-  position: absolute;
-  top: 15px;
-  right: 61.5%;
-  width: 39.5%;
-  height: 15px;
-  background: rgb(10, 118, 79);
-  transform: skew(-45deg);
-  z-index: 0;
-}
-
-.container-cartTitle:before {
-  content: '';
-  position: absolute;
-  top: 30px;
-  right: 61.5%;
-  width: 39.5%;
-  height: 15px;
-  background: rgb(10, 118, 79);
-  transform: skew(45deg);
-  z-index: 0;
+.material-icons {
+  color: rgb(65, 25, 127);
 }
 
 .container-cartTitle .cart__title {
-  color: white;
-  font-size: 20px;
-  padding-left: 35px;
+  color: rgb(65, 25, 127);
   font-weight: 700;
 }
 
@@ -79,24 +53,54 @@ body {
   width: 100%;
 }
 
+.containerPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+
+.total-price {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
 .title strong {
   color: white;
 }
 
 .items {
   display: flex;
-  flex-basis: 70%;
+  width: 70%;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 40px 0;
+
+  /* background-color: blue; */
+}
+
+.removeItem {
+  cursor: pointer;
+  color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 1rem;
 }
 
 .item {
   display: flex;
+  padding: 8px;
+  gap: 10px;
   flex-direction: column;
+
+  /* justify-content: space-around; */
   height: auto;
   margin: 5px;
-  width: 200px;
+  width: 13em;
   border: 2px solid rgb(234, 234, 233);
   border-radius: 5px;
   box-sizing: border-box;
@@ -109,41 +113,103 @@ body {
 .item .item__title {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  padding: 10px;
+
+  /* flex-grow: 1; */
+
+  /* padding: 10px; */
   text-align: center;
 }
 
 .item .item__image {
-  width: 100%;
+  margin: auto;
+  width: 60%;
+}
+
+.item .item__price {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .item .item__add {
-  background-color: rgb(5, 52, 219);
+  background-color: rgb(0, 213, 226);
   border: 0;
   cursor: pointer;
-  margin: 0;
-  padding: 10px;
+  align-self: center;
+  border-radius: 5px;
+  padding: 4px;
+  font-weight: 700;
+  width: 60%;
   color: white;
 }
 
 .cart {
   display: flex;
-  flex-basis: 32%;
+  width: 30%;
   flex-flow: column wrap;
-  background-color: rgb(241, 241, 238);
+  background-color: rgb(243, 249, 251);
   height: 100vh;
 }
 
 .cart .cart__items {
+  width: 100%;
   height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 16px;
   overflow-y: scroll;
 }
 
+.cart .cart__items .cart__item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+
+  /* margin: auto; */
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid black;
+  justify-content: center;
+  box-shadow: 2px 3px 3px 0 rgba(0, 0, 0, 0.251);
+  margin-top: 16px;
+}
+
+.cart__item .productInfo {
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+  flex-direction: column;
+}
+
+.priceCart {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
 .empty-cart {
-  width: 170px;
-  height: 35px;
+  background: rgb(65, 25, 127);
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 70%;
+  height: 3.5em;
+  color: white;
+  font-weight: 600;
+  padding: 4px;
   margin: 0 auto;
-  border: 2px solid rgb(5, 52, 219);
-  background-color: rgb(249, 249, 246);
+}
+
+@media ( max-width : 500px ) {
+
+  .headerLogoImage {
+    height: 90%;
+    width: 12em;
+  }
+
+  .cart .cart__items .cart__item {
+    font-size: 0.9rem;
+  }
 }

@@ -14,4 +14,9 @@ describe('3 - Teste a função saveCartItems', () => {
     saveCartItems(argumento)
     expect(localStorage.setItem).toHaveBeenCalledWith('cartItems', argumento);
   })
+
+  it('Verifica se ao não passar parametros, localStorage não é chamado.', () => {
+    saveCartItems()
+    expect(localStorage.setItem).not.toHaveBeenCalled();
+  })
 });

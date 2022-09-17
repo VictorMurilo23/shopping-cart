@@ -14,4 +14,9 @@ describe('4 - Teste a função getSavedCartItems', () => {
     getSavedCartItems(argumento)
     expect(localStorage.getItem).toHaveBeenCalledWith(argumento);
   })
+
+  it('Verifica se ao não passar parametros, localStorage não é chamado.', () => {
+    getSavedCartItems()
+    expect(localStorage.getItem).not.toHaveBeenCalled();
+  })
 });
