@@ -145,7 +145,7 @@ body {
 .cart {
   display: flex;
   width: 30%;
-  flex-flow: column wrap;
+  flex-direction: column;
   background-color: rgb(243, 249, 251);
   height: 100vh;
 }
